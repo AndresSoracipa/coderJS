@@ -6,44 +6,89 @@ var edad = parseInt(prompt("\xbfCu\xe1l es tu edad?"));
 if (edad <= 10) {
     console.log("Puedes acceder al contenido de clase Kids.");
 } else {
-    console.log("Escoje los temas que creas conocer.");
+    console.log("Escoge los temas que creas conocer.");
 }
 
-// Solicitar al usuario La duracion de la clase
-var limiteSuperior = parseInt(prompt("Ingresa la duraci\xf3n de tu clase (10-90min):"));
 
-// ciclo while,  muestra los numeros de 5 en 5 hasta el número que escriba, la idea es poner un tope en 90  
-var numero = 5;
-while (numero <= limiteSuperior) {
-    console.log(numero);
-    numero += 5;
-}
+// objeto CursoIngles
+var CursoIngles = {
+    tema: "",
+    duracion: 0,
+    visto: false,
+    mostrarInformacion: function () {
+        var estado = this.visto ? "Visto" : "A\xfan sin ver";
+        console.log("Tema: " + this.tema);
+        console.log("Duraci\xf3n: " + this.duracion + " minutos");
+        console.log("Estado: " + estado);
+    },
+};
 
-// Temas gramaticales y agregar más después
-var tema1 = "Simple Present";
-var tema2 = "Simple Past";
-var tema3 = "Present Perfect";
-
-// Al final se quiere hacer una checklist con  botones interactivos en CSS y Html para que el usuario seleccione el tiempo de duración de la clase y los temas que ya conoce
-var vistoTema1 = false;
-var vistoTema2 = false;
-var vistoTema3 = false;
-
-// Función para hacer una  checklist de temas gramaticales
+// función para hacer una checklist de temas gramaticales
 function generarChecklist(tema, visto) {
     console.log(tema + " - " + (visto ? "Visto" : "A\xfan sin ver"));
 }
 
-// Marcar los temas como vistos o no vistos
-vistoTema1 = confirm("\xbfHas visto el tema '" + tema1 + "'? (Aceptar o Ok para s\xed, Cancel para no)");
-vistoTema2 = confirm("\xbfHas visto el tema '" + tema2 + "'? (Aceptar o Ok para s\xed, Cancel para no)");
-vistoTema3 = confirm("\xbfHas visto el tema '" + tema3 + "'? (Aceptar o Ok para s\xed, Cancel para no)");
+// array de cursos
+var cursos = [];
 
-// Generar la checklist de temas gramaticales
-console.log("Checklist de temas gramaticales:");
-generarChecklist(tema1, vistoTema1);
-generarChecklist(tema2, vistoTema2);
-generarChecklist(tema3, vistoTema3);
+// Al final se quiere hacer una checklist con  botones interactivos en CSS y Html para que el usuario seleccione el tiempo de duración de la clase y los temas que ya conoce esto se puede añadir a un carrito de compras donde el usuario acumula clases y paga un total
+var curso1 = Object.create(CursoIngles);
+curso1.tema = "Simple Present";
+curso1.duracion = 30;
+curso1.visto = true;
+cursos.push(curso1);
 
+var curso2 = Object.create(CursoIngles);
+curso2.tema = "Simple Past";
+curso2.duracion = 45;
+curso2.visto = false;
+cursos.push(curso2);
 
+// muestra información de los cursos del array
+console.log("Informaci\xf3n de los cursos:");
+for (var i = 0; i < cursos.length; i++) {
+    cursos[i].mostrarInformacion();
+}
 
+// solicitar al usuario los tiempos de los cursos y calcular la duración promedio
+var tiempoTotal = 0;
+var cantidadCursos = 0;
+var agregarCurso = true;
+
+while (agregarCurso) {
+    var tiempoCurso = parseInt(prompt("Ingresa la duraci\xf3n del curso en minutos:"));
+    tiempoTotal += tiempoCurso;
+    cantidadCursos++;
+
+    agregarCurso = confirm("\xbfQuieres agregar otro curso?");
+
+    if (!agregarCurso) {
+        console.log("La duraci\xf3n total de los cursos es de " + tiempoTotal + " minutos.");
+        console.log("La duraci\xf3n promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
+        alert("La duraci\xf3n total de los cursos es de " + tiempoTotal + " minutos.");
+        alert("La duraci\xf3n promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
+    }
+}
+
+// find()
+var temaBuscado = "Simple Past";
+var cursoEncontrado = cursos.find(function (curso) {
+    return curso.tema === temaBuscado;
+});
+
+if (cursoEncontrado) {
+    console.log("Se encontr\xf3 el curso con el tema '" + temaBuscado + "':");
+    cursoEncontrado.mostrarInformacion();
+} else {
+    console.log("No se encontr\xf3 ning\xfan curso con el tema '" + temaBuscado + "'.");
+}
+
+// filtrado()
+var cursosVistos = cursos.filter(function (curso) {
+    return curso.visto === true;
+});
+
+console.log("Cursos vistos:");
+for (var i = 0; i < cursosVistos.length; i++) {
+    cursosVistos[i].mostrarInformacion();
+}
