@@ -62,24 +62,24 @@ for (let i = 0; i < cursos.length; i++) {
 
 
 function toggleOptions() {
-    var opciones = document.getElementById("opciones");
+    let opciones = document.getElementById("opciones");
     opciones.classList.toggle("visible");
 }
 
 function toggleSubopciones() {
-    var subopciones = document.getElementById("subopciones");
+    let subopciones = document.getElementById("subopciones");
     subopciones.classList.toggle("visible");
 }
 
 function toggleSkills() {
-    var subopciones = document.getElementById("subopciones");
+    let subopciones = document.getElementById("subopciones");
     subopciones.classList.toggle("visible");
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    var claseTopic = document.querySelector("#opciones li:first-child");
-    var claseSkills = document.querySelector("#opciones li:nth-child(2)");
+    let claseTopic = document.querySelector("#opciones li:first-child");
+    let claseSkills = document.querySelector("#opciones li:nth-child(2)");
 
     claseTopic.addEventListener("click", function () {
         toggleSubopciones();
