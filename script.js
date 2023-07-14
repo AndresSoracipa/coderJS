@@ -1,94 +1,95 @@
-// Solicitar al usuario su edad
-//se usa \xbf para mostrar simbolor y acentos
-var edad = parseInt(prompt("\xbfCu\xe1l es tu edad?"));
+let ageInput = document.getElementById('age');
+let submitAgeBtn = document.getElementById('submitAge');
 
-// Verificar si el usuario es mayor de 10 años
-if (edad <= 10) {
-    console.log("Puedes acceder al contenido de clase Kids.");
-} else {
-    console.log("Escoge los temas que creas conocer.");
-}
+submitAgeBtn.addEventListener('click', function() {
+    let age = parseInt(ageInput.value);
+
+    // Verificar si el usuario es mayor de 10 años
+    if (age <= 10) {
+        console.log("Puedes acceder al contenido de clase Kids.");
+    } else {
+        console.log("Escoge los temas que creas conocer.");
+    }
+});
 
 
-// objeto CursoIngles
-var CursoIngles = {
-    tema: "",
-    duracion: 0,
-    visto: false,
-    mostrarInformacion: function () {
-        var estado = this.visto ? "Visto" : "A\xfan sin ver";
-        console.log("Tema: " + this.tema);
-        console.log("Duraci\xf3n: " + this.duracion + " minutos");
-        console.log("Estado: " + estado);
-    },
-};
 
-// función para hacer una checklist de temas gramaticales
-function generarChecklist(tema, visto) {
-    console.log(tema + " - " + (visto ? "Visto" : "A\xfan sin ver"));
-}
 
-// array de cursos
-var cursos = [];
+let durationInput = document.getElementById('duration');
+let addCourseBtn = document.getElementById('addCourse');
 
-// Al final se quiere hacer una checklist con  botones interactivos en CSS y Html para que el usuario seleccione el tiempo de duración de la clase y los temas que ya conoce esto se puede añadir a un carrito de compras donde el usuario acumula clases y paga un total
-var curso1 = Object.create(CursoIngles);
-curso1.tema = "Simple Present";
-curso1.duracion = 30;
-curso1.visto = true;
-cursos.push(curso1);
-
-var curso2 = Object.create(CursoIngles);
-curso2.tema = "Simple Past";
-curso2.duracion = 45;
-curso2.visto = false;
-cursos.push(curso2);
-
-// muestra información de los cursos del array
-console.log("Informaci\xf3n de los cursos:");
-for (var i = 0; i < cursos.length; i++) {
-    cursos[i].mostrarInformacion();
-}
-
-// solicitar al usuario los tiempos de los cursos y calcular la duración promedio
-var tiempoTotal = 0;
-var cantidadCursos = 0;
-var agregarCurso = true;
-
-while (agregarCurso) {
-    var tiempoCurso = parseInt(prompt("Ingresa la duraci\xf3n del curso en minutos:"));
-    tiempoTotal += tiempoCurso;
+addCourseBtn.addEventListener('click', function() {
+    let duration = parseInt(durationInput.value);
+    tiempoTotal += duration;
     cantidadCursos++;
 
-    agregarCurso = confirm("\xbfQuieres agregar otro curso?");
+    agregarCurso = confirm("¿Quieres agregar otro curso?");
 
     if (!agregarCurso) {
-        console.log("La duraci\xf3n total de los cursos es de " + tiempoTotal + " minutos.");
-        console.log("La duraci\xf3n promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
-        alert("La duraci\xf3n total de los cursos es de " + tiempoTotal + " minutos.");
-        alert("La duraci\xf3n promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
+        console.log("La duración total de los cursos es de " + tiempoTotal + " minutos.");
+        console.log("La duración promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
+        alert("La duración total de los cursos es de " + tiempoTotal + " minutos.");
+        alert("La duración promedio de los cursos es de " + (tiempoTotal / cantidadCursos) + " minutos.");
     }
-}
-
-// find()
-var temaBuscado = "Simple Past";
-var cursoEncontrado = cursos.find(function (curso) {
-    return curso.tema === temaBuscado;
 });
 
-if (cursoEncontrado) {
-    console.log("Se encontr\xf3 el curso con el tema '" + temaBuscado + "':");
-    cursoEncontrado.mostrarInformacion();
-} else {
-    console.log("No se encontr\xf3 ning\xfan curso con el tema '" + temaBuscado + "'.");
+
+
+
+let courseContainer = document.getElementById('courseContainer');
+
+for (let i = 0; i < cursos.length; i++) {
+    let course = cursos[i];
+
+    let courseInfo = document.createElement('div');
+    let tema = document.createElement('p');
+    let duracion = document.createElement('p');
+    let estado = document.createElement('p');
+
+    tema.textContent = "Tema: " + course.tema;
+    duracion.textContent = "Duración: " + course.duracion + " minutos";
+    estado.textContent = "Estado: " + (course.visto ? "Visto" : "Aún sin ver");
+
+    courseInfo.appendChild(tema);
+    courseInfo.appendChild(duracion);
+    courseInfo.appendChild(estado);
+
+    courseContainer.appendChild(courseInfo);
 }
 
-// filtrado()
-var cursosVistos = cursos.filter(function (curso) {
-    return curso.visto === true;
+
+
+
+
+function toggleOptions() {
+    var opciones = document.getElementById("opciones");
+    opciones.classList.toggle("visible");
+}
+
+function toggleSubopciones() {
+    var subopciones = document.getElementById("subopciones");
+    subopciones.classList.toggle("visible");
+}
+
+function toggleSkills() {
+    var subopciones = document.getElementById("subopciones");
+    subopciones.classList.toggle("visible");
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var claseTopic = document.querySelector("#opciones li:first-child");
+    var claseSkills = document.querySelector("#opciones li:nth-child(2)");
+
+    claseTopic.addEventListener("click", function () {
+        toggleSubopciones();
+    });
+
+    claseSkills.addEventListener("click", function () {
+        toggleSkills();
+    });
+    
 });
 
-console.log("Cursos vistos:");
-for (var i = 0; i < cursosVistos.length; i++) {
-    cursosVistos[i].mostrarInformacion();
-}
+
+

@@ -1,0 +1,39 @@
+#btnClase {
+    background-color: rgb(27, 196, 27);
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.opciones-container {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.opciones-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.opciones-container li {
+    padding: 24px 32px;
+    cursor: pointer;
+}
+
+.opciones-container li:hover {
+    background-color: #ddd;
+}
+
+.opciones-container.visible {
+    display: block;
+}
