@@ -1,39 +1,128 @@
-#btnClase {
-    background-color: rgb(27, 196, 27);
-    color: white;
-    font-size: 20px;
-    padding: 10px 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 20px;
+.message {
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.opciones-container {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
 
-.opciones-container ul {
-    list-style-type: none;
+
+
+.contenedorChecklist {
+    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    background-color: #f1f1f1;
 }
 
-.opciones-container li {
-    padding: 24px 32px;
+.contenedorChecklist {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.itemTiempo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.itemTiempo input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.itemTiempo label {
+    flex: 1;
+}
+
+.button-containerTiempo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-containerTiempo button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.opciones-container li:hover {
-    background-color: #ddd;
+
+
+
+.textoCarrito {
+    font-family: Arial, sans-serif;
+    margin: 20px;
 }
 
-.opciones-container.visible {
-    display: block;
+h1,
+h2 {
+    text-align: center;
+}
+
+.containerCarrito {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.product-list,
+.cart {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.product-item,
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.product-item button {
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-item span {
+    flex: 1;
+}
+
+.checkout-btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.clear-cart-btn {
+    padding: 10px 20px;
+    background-color: #637063;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

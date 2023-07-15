@@ -94,41 +94,60 @@
             </div>
         </div>
 
-<div>
-    <label for="age">¿Cuál es tu edad?</label>
-<input type="number" id="age">
-<button id="submitAge">Enviar</button>
-</div>
-
-<div>
-    <label for="duration">Ingresa la duración del curso en minutos:</label>
-<input type="number" id="duration">
-<button id="addCourse">Agregar curso</button>
-</div>
-
         <div>
-            <button id="btnClase" onclick="toggleOptions()">Escoge una clase</button>
+            <input type="number" id="age" placeholder="Ingresa tu edad">
+            <button id="submitAge">Enviar</button>
+            <div id="messageContainer"></div>
 
-            <div id="opciones" class="opciones-container">
-                <ul class="opciones-lista">
-                    <li>Clase Topic</li>
-                    <li>Clase Skills</li>
-                    <li>Club de Conversación</li>
-                    <li>Activity</li>
-                    <li>Every Day Situation</li>
-                </ul>
-            </div>
-
-            <div id="subopciones" class="opciones-container">
-                <ul class="opciones-lista">
-                    <li>Present Perfect</li>
-                    <li>Simple Past</li>
-                    <li>Phonetics</li>
-                    <li>Otro</li>
-                </ul>
-            </div>
         </div>
 
+
+
+        <section class="contenedorChecklist">
+            <h2>Establece la Duración de Tu Calse en Minutos</h2>
+
+            <div class="itemTiempo">
+                <input type="checkbox" id="15min">
+                <label for="item1">15 (min)</label>
+            </div>
+
+            <div class="itemTiempo">
+                <input type="checkbox" id="30min">
+                <label for="item2">30 (min)</label>
+            </div>
+
+            <div class="itemTiempo">
+                <input type="checkbox" id="45min">
+                <label for="item3">45 (min)</label>
+            </div>
+
+            <div class="itemTiempo">
+                <input type="checkbox" id="60min">
+                <label for="item4">60 (min)</label>
+            </div>
+
+            <div class="itemTiempo">
+                <input type="checkbox" id="90min">
+                <label for="item5">90 (min)</label>
+            </div>
+
+            <div class="button-containerTiempo">
+                <button onclick="saveItems()">Guardar</button>
+            </div>
+        </section>
+
+        <section class="textoCarrito">
+            <h2>Agrega tus clases al carrito</h2>
+            <div class="containerCarrito">
+                <div class="product-list" id="product-list"></div>
+                <div class="cart">
+                    <h2>Carrito</h2>
+                    <div id="cart"></div>
+                    <button id="checkout-btn" class="checkout-btn" disabled>Realizar compra</button>
+                    <button id="clear-cart-btn" class="clear-cart-btn">Borrar carrito</button>
+                </div>
+            </div>
+        </section>
 
         <section class="bg-dark text-light py-5">
             <div class="container">
