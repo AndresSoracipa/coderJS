@@ -73,7 +73,7 @@ item5.addEventListener('click', function () {
 
 // Guardar el valor del elemento seleccionado en el Local Storage
 function saveItems() {
-    var selectedItem = item1.checked ? item1 :
+    let selectedItem = item1.checked ? item1 :
         item2.checked ? item2 :
             item3.checked ? item3 :
                 item4.checked ? item4 :
@@ -86,7 +86,7 @@ function saveItems() {
 }
 
 // Cargar el elemento seleccionado del Local Storage y deseleccionar los demás
-var selectedItem = localStorage.getItem('selectedItem');
+let selectedItem = localStorage.getItem('selectedItem');
 if (selectedItem) {
     document.getElementById(selectedItem).checked = true;
     handleItemClick(document.getElementById(selectedItem));
@@ -97,12 +97,12 @@ if (selectedItem) {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento donde se mostrarán los productos
-    const productList = document.getElementById('product-list');
+    let productList = document.getElementById('product-list');
     // Obtener el carrito desde Local Storage o inicializarlo vacío
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Definir los productos disponibles
-    const products = [
+    let products = [
         { id: 1, name: 'Clase Topic, Gramtical, Simple Present', price: 3 },
         { id: 2, name: 'Clase Topic, Gramtical, Simple Past', price: 5 },
         { id: 3, name: 'Clase Topic, Gramtical, Present Perfect', price: 7 },
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mostrar los productos disponibles en la página
     products.forEach(product => {
-        const productItem = document.createElement('div');
+        let productItem = document.createElement('div');
         productItem.className = 'product-item';
         productItem.innerHTML = `
         <span>${product.name}</span>
@@ -131,11 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Obtener los botones de "Agregar al carrito"
-    const addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
+    let addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
     for (let i = 0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener('click', function (event) {
-            const productId = event.target.getAttribute('data-id');
-            const product = products.find(item => item.id === parseInt(productId));
+            let productId = event.target.getAttribute('data-id');
+            let product = products.find(item => item.id === parseInt(productId));
             if (product) {
                 cartItems.push(product);
                 // Actualizar el carrito en Local Storage
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('cart').innerHTML = '';
 
         cartItems.forEach(item => {
-            const cartItem = document.createElement('div');
+            let cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
           <span>${item.name}</span>
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Actualizar el estado del botón de "Realizar compra"
     function updateCheckoutButton() {
-        const checkoutButton = document.getElementById('checkout-btn');
+        let checkoutButton = document.getElementById('checkout-btn');
         checkoutButton.disabled = cartItems.length === 0;
     }
 });
