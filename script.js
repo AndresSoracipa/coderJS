@@ -14,11 +14,9 @@ submitAgeBtn.addEventListener('click', function () {
         messageContainer.textContent = "Escoge los temas que creas conocer.";
     }
 
-    // Guardar el mensaje en el Local Storage
     localStorage.setItem('message', messageContainer.textContent);
 });
 
-// Obtener el mensaje del Local Storage al cargar la página
 let savedMessage = localStorage.getItem('message');
 if (savedMessage) {
     messageContainer.textContent = savedMessage;
@@ -26,7 +24,7 @@ if (savedMessage) {
 
 
 
-// Obtener referencias a los elementos de la lista
+// Checklist de tiempos para las clases
 let item1 = document.getElementById('15min');
 let item2 = document.getElementById('30min');
 let item3 = document.getElementById('45min');
@@ -43,14 +41,14 @@ function handleItemClick(item) {
     }
 }
 
-// Cargar los valores almacenados en el Local Storage
+
 item1.checked = localStorage.getItem('15min') === 'true';
 item2.checked = localStorage.getItem('30min') === 'true';
 item3.checked = localStorage.getItem('45min') === 'true';
 item4.checked = localStorage.getItem('60min') === 'true';
 item5.checked = localStorage.getItem('90min') === 'true';
 
-// Asignar el manejador de eventos a cada elemento
+// check para cada duracion
 item1.addEventListener('click', function () {
     handleItemClick(item1);
 });
@@ -71,7 +69,7 @@ item5.addEventListener('click', function () {
     handleItemClick(item5);
 });
 
-// Guardar el valor del elemento seleccionado en el Local Storage
+// Guardar el valor en el Local Storage
 function saveItems() {
     let selectedItem = item1.checked ? item1 :
         item2.checked ? item2 :
@@ -85,7 +83,7 @@ function saveItems() {
     }
 }
 
-// Cargar el elemento seleccionado del Local Storage y deseleccionar los demás
+// Con este boton se carga el elemento seleccionado del Local Storage y deseleccionar los otros
 let selectedItem = localStorage.getItem('selectedItem');
 if (selectedItem) {
     document.getElementById(selectedItem).checked = true;
@@ -95,13 +93,12 @@ if (selectedItem) {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Obtener el elemento donde se mostrarán los productos
+document.addEventListener('DOMContentLoaded', function () {    
     let productList = document.getElementById('product-list');
-    // Obtener el carrito desde Local Storage o inicializarlo vacío
+    // carrito desde Local Storage 
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Definir los productos disponibles
+    // clases 
     let products = [
         { id: 1, name: 'Clase Topic, Gramtical, Simple Present', price: 3 },
         { id: 2, name: 'Clase Topic, Gramtical, Simple Past', price: 5 },
@@ -118,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { id: 13, name: 'Situations, Advanced', price: 5 }
     ];
 
-    // Mostrar los productos disponibles en la página
+    // Mostrar los productos disponibles en la página con JS
     products.forEach(product => {
         let productItem = document.createElement('div');
         productItem.className = 'product-item';
@@ -130,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         productList.appendChild(productItem);
     });
 
-    // Obtener los botones de "Agregar al carrito"
+    // botones de "Agregar al carrito"
     let addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
     for (let i = 0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener('click', function (event) {
@@ -167,16 +164,16 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCheckoutButton();
 
 
-    // Evento para realizar la compra
+    // realizar la compra
     document.getElementById('checkout-btn').addEventListener('click', function () {
-        // Realizar acciones necesarias al momento de la compra
-        // ...
+        
+        
 
         // Vaciar el carrito y actualizar Local Storage
         cartItems.length = 0;
         localStorage.setItem('cart', JSON.stringify(cartItems));
 
-        // Actualizar la visualización del carrito
+        // comprar
         renderCartItems();
         alert('¡Compra realizada con éxito!');
 
@@ -190,13 +187,13 @@ document.addEventListener('DOMContentLoaded', function () {
         renderCartItems();
         updateCheckoutButton();
     });
-    // Evento para borrar el carrito
+    // borrar el carrito
     document.getElementById('clear-cart-btn').addEventListener('click', function () {
-        // ...
+        
         updateCheckoutButton();
     });
 
-    // Actualizar el estado del botón de "Realizar compra"
+    // boton Realizar compra
     function updateCheckoutButton() {
         let checkoutButton = document.getElementById('checkout-btn');
         checkoutButton.disabled = cartItems.length === 0;
