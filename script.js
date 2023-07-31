@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
         const products = await response.json();
 
-        // Mostrar los productos disponibles en la página con JS
+        // Mostrar los productos disponibles 
         products.forEach(product => {
             let productItem = document.createElement('div');
             productItem.className = 'product-item';
@@ -129,17 +129,17 @@ document.addEventListener('DOMContentLoaded', async function () {
                     } else {
                         cartItems.push({ ...product, quantity: 1 });
                     }
-                    // Actualizar el carrito en Local Storage
+                    
                     localStorage.setItem('cart', JSON.stringify(cartItems));
-                    // Actualizar la visualización del carrito
+                    
                     renderCartItems();
                 }
             });
         }
 
-        // Mostrar los productos en el carrito
+        
         function renderCartItems() {
-            // Limpiar el carrito antes de volver a mostrar los productos
+            // limpiar el carrito 
             document.getElementById('cart').innerHTML = '';
 
             cartItems.forEach(item => {
@@ -189,9 +189,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             let cartItem = cartItems.find(item => item.id === parseInt(productId));
             if (cartItem && cartItem.quantity > 1) {
                 cartItem.quantity -= 1;
-                // Actualizar el carrito en Local Storage
+                
                 localStorage.setItem('cart', JSON.stringify(cartItems));
-                // Actualizar la visualización del carrito
+                
                 renderCartItems();
             }
         }
@@ -200,31 +200,31 @@ document.addEventListener('DOMContentLoaded', async function () {
             let cartItem = cartItems.find(item => item.id === parseInt(productId));
             if (cartItem) {
                 cartItem.quantity += 1;
-                // Actualizar el carrito en Local Storage
+
                 localStorage.setItem('cart', JSON.stringify(cartItems));
-                // Actualizar la visualización del carrito
+                
                 renderCartItems();
             }
         }
 
         function removeProductFromCart(productId) {
-            // Encontrar el índice del producto a eliminar
+            
             let index = cartItems.findIndex(item => item.id === parseInt(productId));
 
             if (index !== -1) {
                 // Eliminar el producto del array
                 cartItems.splice(index, 1);
 
-                // Actualizar el carrito en Local Storage
+                
                 localStorage.setItem('cart', JSON.stringify(cartItems));
 
-                // Actualizar la visualización del carrito
+                
                 renderCartItems();
                 updateCheckoutButton();
             }
         }
 
-        // Mostrar los productos del carrito al cargar la página
+        // mostrar los productos del carrito al cargar la página
         renderCartItems();
         updateCheckoutButton();
 
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // realizar la compra
     document.getElementById('checkout-btn').addEventListener('click', function () {
-        // Vaciar el carrito y actualizar Local Storage
+        
         cartItems.length = 0;
         localStorage.setItem('cart', JSON.stringify(cartItems));
 
@@ -244,11 +244,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     });
     document.getElementById('clear-cart-btn').addEventListener('click', function () {
-        // Vaciar el carrito y actualizar Local Storage
+        
         cartItems.length = 0;
         localStorage.setItem('cart', JSON.stringify(cartItems));
 
-        // Actualizar el carrito
+        // actualizar el carrito
         renderCartItems();
         updateCheckoutButton();
     });
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         updateCheckoutButton();
     });
 
-    // boton Realizar compra
+    
     function updateCheckoutButton() {
         let checkoutButton = document.getElementById('checkout-btn');
         checkoutButton.disabled = cartItems.length === 0;
