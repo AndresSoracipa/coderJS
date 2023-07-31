@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     try {
-        const response = await fetch('./productos.json');
+        let response = await fetch('./productos.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const products = await response.json();
+        let products = await response.json();
 
         // Mostrar los productos disponibles 
         products.forEach(product => {
