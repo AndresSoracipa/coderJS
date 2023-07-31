@@ -93,109 +93,123 @@ if (selectedItem) {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {    
+document.addEventListener('DOMContentLoaded', function () {
     let productList = document.getElementById('product-list');
-    // carrito desde Local Storage 
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     // clases 
-    let products = [
-        { id: 1, name: 'Clase Topic, Gramtical, Simple Present', price: 3 },
-        { id: 2, name: 'Clase Topic, Gramtical, Simple Past', price: 5 },
-        { id: 3, name: 'Clase Topic, Gramtical, Present Perfect', price: 7 },
-        { id: 4, name: 'Clase Skills, Listening', price: 10 },
-        { id: 5, name: 'Clase Skills, Speaking', price: 12 },
-        { id: 6, name: 'Clase Skills, Writing', price: 15 },
-        { id: 7, name: 'Clase Skills, Reading', price: 8 },
-        { id: 8, name: 'Conversational Club, Intermediate', price: 5 },
-        { id: 9, name: 'Conversational Club, Advanced', price: 5 },
-        { id: 10, name: 'Activity, Intermediate', price: 5 },
-        { id: 11, name: 'Activity, Advanced', price: 5 },
-        { id: 12, name: 'Situations, Intermediate', price: 5 },
-        { id: 13, name: 'Situations, Advanced', price: 5 }
-    ];
+    fetch('./productos.json')
+        .then(response => response.json())
+        .then(products => {
 
-    // Mostrar los productos disponibles en la página con JS
-    products.forEach(product => {
-        let productItem = document.createElement('div');
-        productItem.className = 'product-item';
-        productItem.innerHTML = `
-        <span>${product.name}</span>
-        <span>$${product.price}</span>
-        <button class="add-to-cart-btn" data-id="${product.id}">Agregar al carrito</button>
-      `;
-        productList.appendChild(productItem);
-    });
+            // Mostrar los productos disponibles en la página con JS
+            products.forEach(product => {
+                let productItem = document.createElement('div');
+                productItem.className = 'product-item';
+                productItem.innerHTML = `
+                <span>${product.name}</span>
+                <span>$${product.price}</span>
+                <button class="add-to-cart-btn" data-id="${product.id}">Agregar al carrito</button>
+              `;
+                productList.appendChild(productItem);
+            });
 
-    // botones de "Agregar al carrito"
-    let addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
-    for (let i = 0; i < addToCartButtons.length; i++) {
-        addToCartButtons[i].addEventListener('click', function (event) {
-            let productId = event.target.getAttribute('data-id');
-            let product = products.find(item => item.id === parseInt(productId));
-            if (product) {
-                cartItems.push(product);
-                // Actualizar el carrito en Local Storage
-                localStorage.setItem('cart', JSON.stringify(cartItems));
-                // Actualizar la visualización del carrito
-                renderCartItems();
+            // botones de "Agregar al carrito"
+            let addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
+            for (let i = 0; i < addToCartButtons.length; i++) {
+                addToCartButtons[i].addEventListener('click', function (event) {
+                    let productId = event.target.getAttribute('data-id');
+                    let product = products.find(item => item.id === parseInt(productId));
+                    if (product) {
+                        cartItems.push(product);
+                        // Actualizar el carrito en Local Storage
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                        // Actualizar la visualización del carrito
+                        renderCartItems();
+                    }
+                });
             }
+
+            // Mostrar los productos en el carrito
+            function renderCartItems() {
+                // Limpiar el carrito antes de volver a mostrar los productos
+                document.getElementById('cart').innerHTML = '';
+
+                cartItems.forEach(item => {
+                    let cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                  <span>${item.name}</span>
+                  <span>$${item.price}</span>
+                  <button class="remove-from-cart-btn" data-id="${item.id}">Eliminar del carrito</button>
+                `;
+                    document.getElementById('cart').appendChild(cartItem);
+                });
+                let removeFromCartButtons = document.getElementsByClassName('remove-from-cart-btn');
+                for (let i = 0; i < removeFromCartButtons.length; i++) {
+                    removeFromCartButtons[i].addEventListener('click', function (event) {
+                        let productId = event.target.getAttribute('data-id');
+                        removeProductFromCart(productId);
+                    });
+                }
+            }
+            function removeProductFromCart(productId) {
+                // Encontrar el índice del producto a eliminar
+                let index = cartItems.findIndex(item => item.id === parseInt(productId));
+            
+                if (index !== -1) {
+                    // Eliminar el producto del array
+                    cartItems.splice(index, 1);
+            
+                    // Actualizar el carrito en Local Storage
+                    localStorage.setItem('cart', JSON.stringify(cartItems));
+            
+                    // Actualizar la visualización del carrito
+                    renderCartItems();
+                    updateCheckoutButton();
+                }
+            }
+            
+
+            // Mostrar los productos del carrito al cargar la página
+            renderCartItems();
+            updateCheckoutButton();
+
+
+            // realizar la compra
+            document.getElementById('checkout-btn').addEventListener('click', function () {
+
+                // Vaciar el carrito y actualizar Local Storage
+                cartItems.length = 0;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+
+                // comprar
+                renderCartItems();
+                alert('¡Compra realizada con éxito!');
+
+            });
+            document.getElementById('clear-cart-btn').addEventListener('click', function () {
+                // Vaciar el carrito y actualizar Local Storage
+                cartItems.length = 0;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+
+                // Actualizar el carrito
+                renderCartItems();
+                updateCheckoutButton();
+            });
+            // borrar el carrito
+            document.getElementById('clear-cart-btn').addEventListener('click', function () {
+
+                updateCheckoutButton();
+            });
+
+            // boton Realizar compra
+            function updateCheckoutButton() {
+                let checkoutButton = document.getElementById('checkout-btn');
+                checkoutButton.disabled = cartItems.length === 0;
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar los productos:', error);
         });
-    }
-
-    // Mostrar los productos en el carrito
-    function renderCartItems() {
-        // Limpiar el carrito antes de volver a mostrar los productos
-        document.getElementById('cart').innerHTML = '';
-
-        cartItems.forEach(item => {
-            let cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-          <span>${item.name}</span>
-          <span>$${item.price}</span>
-        `;
-            document.getElementById('cart').appendChild(cartItem);
-        });
-    }
-
-    // Mostrar los productos del carrito al cargar la página
-    renderCartItems();
-    updateCheckoutButton();
-
-
-    // realizar la compra
-    document.getElementById('checkout-btn').addEventListener('click', function () {
-        
-        
-
-        // Vaciar el carrito y actualizar Local Storage
-        cartItems.length = 0;
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-
-        // comprar
-        renderCartItems();
-        alert('¡Compra realizada con éxito!');
-
-    });
-    document.getElementById('clear-cart-btn').addEventListener('click', function () {
-        // Vaciar el carrito y actualizar Local Storage
-        cartItems.length = 0;
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-
-        // Actualizar la visualización del carrito
-        renderCartItems();
-        updateCheckoutButton();
-    });
-    // borrar el carrito
-    document.getElementById('clear-cart-btn').addEventListener('click', function () {
-        
-        updateCheckoutButton();
-    });
-
-    // boton Realizar compra
-    function updateCheckoutButton() {
-        let checkoutButton = document.getElementById('checkout-btn');
-        checkoutButton.disabled = cartItems.length === 0;
-    }
 });

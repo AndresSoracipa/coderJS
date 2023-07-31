@@ -1,0 +1,15 @@
+[
+    { "id": 1, "name": "Clase Topic, Grammatical, Simple Present", "price": 3 },
+    { "id": 2, "name": "Clase Topic, Grammatical, Simple Past", "price": 5 },
+    { "id": 3, "name": "Clase Topic, Grammatical, Present Perfect", "price": 7 },
+    { "id": 4, "name": "Clase Skills, Listening", "price": 10 },
+    { "id": 5, "name": "Clase Skills, Speaking", "price": 12 },
+    { "id": 6, "name": "Clase Skills, Writing", "price": 15 },
+    { "id": 7, "name": "Clase Skills, Reading", "price": 8 },
+    { "id": 8, "name": "Conversational Club, Intermediate", "price": 5 },
+    { "id": 9, "name": "Conversational Club, Advanced", "price": 5 },
+    { "id": 10, "name": "Activity, Intermediate", "price": 5 },
+    { "id": 11, "name": "Activity, Advanced", "price": 5 },
+    { "id": 12, "name": "Situations, Intermediate", "price": 5 },
+    { "id": 13, "name": "Situations, Advanced", "price": 5 }
+]
